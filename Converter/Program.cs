@@ -20,17 +20,12 @@
             }
 
             Console.ReadKey();
-
-
-
         }
 
         private static string createConvert(int a)
         {
             return Convert.ToString(a, 16);
         }
-
-        
 
     }
     
