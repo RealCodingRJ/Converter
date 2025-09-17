@@ -4,30 +4,33 @@ using System.Drawing;
 
 namespace Converter
 {
-
-    
     class App
     {
 
-        private static void Main(string[] args)
+        private static async Task Main(string[] args)
         {
             if(args.Length == 0)
-            {                
+            {
 
-          
-                Console.WriteLine("Enter Hex: ");
-                int colorR = Convert.ToInt16(Console.ReadLine());
+                try
+                {
+                    Console.WriteLine("Enter Hex: ");
+                    int colorR = Convert.ToInt16(Console.ReadLine());
 
-                string colorCode = CreateConvert(colorR);
+                    string colorCode = CreateConvert(colorR);
 
-                Console.Write(colorCode);
-                Console.Write(colorCode);
-                Console.Write(colorCode);
+                    Console.Write(colorCode);
+                    Console.Write(colorCode);
+                    Console.Write(colorCode);
 
-                string ColorList = $"# {colorCode}, {colorCode}, {colorCode}";
+                    string ColorList = $"# {colorCode}, {colorCode}, {colorCode}";
 
-                Doc(ColorList);
+                    await Doc(ColorList);
 
+                } catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
 
             Console.ReadKey();
@@ -39,9 +42,9 @@ namespace Converter
         }
 
 
-        private async static void Doc(string doc)
+        private async static Task Doc(string doc)
         {
-            const string URL = "";
+            const string URL = "mongodb://localhost:27017/";
             var client = new MongoClient(URL);
             var db = client.GetDatabase("Color");
             var coll = db.GetCollection<BsonDocument>("color");
